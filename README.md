@@ -1,18 +1,15 @@
-
 ===========
 PROGRAMMAZIONE PER IL WEB
 ===========
 
-Secondo progetto: Student’s Chat
-Bonadiman Gabriele (mat. 151901)
-Munarini Stefano (mat. 151903) 
+Bonadiman Gabriele & Munarini Stefano
 
 
 
 
 
 
-
+Il prgetto richiedeva l'implementazione di un forum per studenti dove potersi scambiare idee, informazioni e materiale su argomenti trattati a lezione. Le altre funzionalita' sono spigate qui sotto. 
 
 
 
