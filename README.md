@@ -1,32 +1,17 @@
-===========
-PROGRAMMAZIONE PER IL WEB
-===========
-
-Bonadiman Gabriele & Munarini Stefano
-
-
-
+# [PROGRAMMAZIONE PER IL WEB](http://georgeosddev.github.com/markdown-edit)
+### Bonadiman Gabriele & Munarini Stefano
 
 
 
 Il prgetto richiedeva l'implementazione di un forum per studenti dove potersi scambiare idee, informazioni e materiale su argomenti trattati a lezione. Le altre funzionalita' sono spigate qui sotto. 
 
 
-
-
-
-
-
-
-==
-ARCHITETTURA DELL’APPLICAZIONE
+## INFO DELL’APPLICAZIONE
 
 Questo progetto è stato sviluppato con tecnologia Java Servlet e JSP (Java Servlet Page) e pattern MVC (Model-View-Controller). Il server utilizzato è GlassFish 4.0, mentre il database è Derby.
 
 
-
-LE LIBRERIE 
-
+## LE LIBRERIE 
 Abbiamo importato per la gestione dell’intero progetto alcune librerie
 
 JSTL, che ci permette di manipolare dati nelle JSP, senza l’utilizzo di Java, per avere del codice HTML più pulito
@@ -38,8 +23,7 @@ jquery per l’utilizzo di alcuni script a frontend
 
 
 
-DATABASE
-
+##DATABASE
 Analizziamo il Database sul quale si basa il progetto. E’ un DB relazionale con una struttura semplice e le relazioni essenziali. Si sono create le seguenti tabelle:
 
 	UTENTI (id,username,password,email,avatar,tipo_utente,data_time)
@@ -56,7 +40,7 @@ Questa e’ la configurazione precisa utilizzata per immagazzinare i dati e gest
 
 
 
-ARCHITETTURA
+##ARCHITETTURA
 
 L’architettura implementata e’ la seguente e rispecchia il pattern MVC. Abbiamo deciso di utilizzare diversi package com.secondoProgetto per la suddivisione delle varie componenti del progetto.
   
@@ -88,7 +72,7 @@ Nel file web.xml vengono mappate le servlet, i filtri, le pagine d'errore, l'url
 
 
 
-I FILTRI
+##I FILTRI
 
 I filtri inseriti all’interno del progetto sono quattro. Uno effettua una propria funzione e non sono legati tra loro. Troviamo di seguito il filtro di
 
@@ -98,4 +82,3 @@ I filtri inseriti all’interno del progetto sono quattro. Uno effettua una prop
 	SESSION 	un semplice filtro che ci permette di capire se l’utente e’ loggato 			oppure no
 
 Mappati successivamente nel file web.xml i filtri vengono attivati sulle servlet definite dal pattern-url. 
-
