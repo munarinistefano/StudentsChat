@@ -3,7 +3,7 @@
 
 
 
-Il prgetto richiedeva l'implementazione di un forum per studenti dove potersi scambiare idee, informazioni e materiale su argomenti trattati a lezione. Le altre funzionalita' sono spigate qui sotto. 
+Il progetto richiedeva l'implementazione di un forum per studenti dove potersi scambiare idee, informazioni e materiale su argomenti trattati a lezione. Le altre funzionalita' sono spigate di seguito. 
 
 
 ## INFO DELL’APPLICAZIONE
