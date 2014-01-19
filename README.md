@@ -18,6 +18,7 @@ Il prgetto richiedeva l'implementazione di un forum per studenti dove potersi sc
 
 
 ARCHITETTURA DELL’APPLICAZIONE
+
 Questo progetto è stato sviluppato con tecnologia Java Servlet e JSP (Java Servlet Page) e pattern MVC (Model-View-Controller). Il server utilizzato è GlassFish 4.0, mentre il database è Derby.
 
 
