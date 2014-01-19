@@ -1,0 +1,151 @@
+DROP TABLE APP.GRUPPIUTENTE;
+DROP TABLE APP.INVITI;
+DROP TABLE APP.POSTS;
+DROP TABLE APP.GRUPPI;
+DROP TABLE APP.UTENTI;
+
+
+
+CREATE TABLE UTENTI(
+        ID INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+        username VARCHAR(50),
+        password VARCHAR(50),
+	email VARCHAR(50),
+	avatar VARCHAR(100),
+	tipo_utente INT,
+	date_time TIMESTAMP,
+        PRIMARY KEY (ID)
+);
+
+CREATE TABLE GRUPPI(
+    	ID INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    	nome VARCHAR(100),
+    	data_creazione TIMESTAMP,
+	flag INT,
+    	ID_proprietario INT NOT NULL,
+	stato INT DEFAULT 0,
+    	PRIMARY KEY(ID),
+	FOREIGN KEY (ID_proprietario) REFERENCES UTENTI(ID)
+);
+
+CREATE TABLE INVITI(
+    	ID_utente INT NOT NULL,
+    	ID_gruppo INT NOT NULL,
+    	stato INT,
+    	PRIMARY KEY(ID_utente, ID_gruppo),
+	FOREIGN KEY (ID_utente) REFERENCES UTENTI(ID),
+	FOREIGN KEY (ID_gruppo) REFERENCES GRUPPI(ID)
+);
+
+CREATE TABLE POSTS(
+    	ID INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    	testo VARCHAR(500),
+	ID_utente INT NOT NULL,
+    	ID_gruppo INT NOT NULL,
+	date_time TIMESTAMP,
+	file VARCHAR(100),
+    	PRIMARY KEY(ID),
+	FOREIGN KEY (ID_utente) REFERENCES UTENTI(ID),
+	FOREIGN KEY (ID_gruppo) REFERENCES GRUPPI(ID)
+);
+
+CREATE TABLE GRUPPIUTENTE(
+    	ID INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    	ID_utente INT NOT NULL,
+    	ID_gruppo INT NOT NULL,
+        PRIMARY KEY (ID)
+);
+
+
+
+--INSERIMENTO UTENTI 
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('gabriele','root','insertYour@mail.com',0,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('stefano','root','insertYour@mail.com',0,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('gabri','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('marianna','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('giulio','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('marco','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('giacomo','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('erica','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('gianni','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+INSERT INTO UTENTI (username,password,email,tipo_utente,date_time) VALUES ('sara','root','insertYour@mail.com',1,'2013-12-30 09:00:00.000');
+
+
+--INSERIMENTO GRUPPI
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Web Programming','2013-03-11 00:00:00.000',0,1,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Probabilità','2013-03-11 00:00:00.000',1,2,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Analisi 3','2013-03-11 00:00:00.000',0,3,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Algoritmi','2013-03-11 00:00:00.000',1,1,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Metallurgia','2013-03-11 00:00:00.000',0,2,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('SYSOP','2013-03-11 00:00:00.000',1,3,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Matematica','2013-03-11 00:00:00.000',1,1,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('JAVA','2013-03-11 00:00:00.000',1,2,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Programmazione 1','2013-03-11 00:00:00.000',1,3,0);
+INSERT INTO GRUPPI (nome,data_creazione,flag,id_proprietario,stato) VALUES ('Funzionale','2013-03-11 00:00:00.000',1,2,1);
+
+--INSERIMENTO GRUPPIUTENTE (Proprietari gruppo)
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (1,1);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (1,4);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (1,7);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (2,2);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (2,5);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (2,8);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (3,3);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (3,6);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (3,9);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (3,10);
+
+--INSERIMENTO GRUPPIUTENTE (Utenti gruppo)
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (4,3);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (4,4);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (4,7);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (5,1);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (5,4);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (6,3);
+INSERT INTO GRUPPIUTENTE (ID_utente,ID_gruppo) VALUES (6,5);
+
+
+--INSERIMENTO INVITI
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (1,3,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (1,5,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (1,6,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (2,1,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (2,3,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (2,6,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (2,9,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (3,1,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (3,2,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (3,4,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (3,8,0);
+
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (4,1,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (4,2,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (4,5,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (4,6,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (4,9,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (5,2,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (5,3,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (5,6,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (5,8,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (6,1,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (6,2,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (6,4,0);
+INSERT INTO INVITI (id_utente,id_gruppo,stato) VALUES (6,6,0);
+
+
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',1,1,'2014-01-09 23:12:32.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',1,4,'2014-01-09 21:19:32.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',1,7,'2014-01-09 22:18:57.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',2,2,'2014-01-09 14:45:33.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',2,5,'2014-01-09 06:54:39.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',2,8,'2014-01-09 18:32:42.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',3,3,'2014-01-09 16:56:20.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',3,6,'2014-01-09 22:12:39.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',3,9,'2014-01-09 19:12:46.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',4,3,'2014-01-09 20:12:43.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',4,4,'2014-01-10 21:12:12.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',4,7,'2014-01-09 23:22:09.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',5,1,'2014-01-09 23:18:32.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',5,4,'2014-01-12 15:09:57.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',6,3,'2014-01-09 04:48:02.000',null);
+INSERT INTO POSTS (testo,ID_utente,ID_gruppo,date_time,file) VALUES ('Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',4,5,'2014-01-09 05:56:07.000',null);
