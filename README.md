@@ -28,15 +28,13 @@ The Server used is GlassFish 4.0.
 </ul>
 
 <h4> Database </h4>
-The Database used is Derby. We designed it to have 3 tables and 2 relations, as follow:
+The Database used is Derby. We designed it to have 5 tables, as follow:
 
 	USER (id,username,password,email,avatar,user_type,date_time)
 	POST (id, text, user_id*, group_id*,date_time,file)
 	GROUP (id, name, creation_date, flag, owner*,state)
 	USER_GROUP (id, user_id*, group_id*)
 	INVITATION (id,user_id*,group_id*)
-
-The 2 relations are represented by table USER_GROUP and INVITATION.
 
 <h4> Packages: </h4>
 <ul>
