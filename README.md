@@ -1,4 +1,4 @@
-<h1 align='center'>Web Programming</h1>
+<h1 align='center'> Student's Chat - Web Project</h1>
 
 <p> Developed by: </p>
 <ul>
